@@ -22,9 +22,9 @@ namespace PyramidTraverseExercise.UnitTest
         [TestCase(4, ExpectedResult = 731)]
         public int GetHighestSum(int testDataIndex)
         {
-            var matrice = TestData[testDataIndex];
+            var matrix = TestData[testDataIndex];
 
-            return _twoDMatrixPathfinderService.GetHighestPossibleSum(matrice);
+            return _twoDMatrixPathfinderService.GetHighestPossibleSum(matrix);
         }
 
         private static int[][][] TestData => new[]
