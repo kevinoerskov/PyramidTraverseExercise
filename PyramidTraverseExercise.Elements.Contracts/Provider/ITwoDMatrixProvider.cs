@@ -2,6 +2,6 @@
 {
     public interface ITwoDMatrixProvider
     {
-        int[][] Get2DMatrice();
+        int[][] Get2DMatrix();
     }
 }

@@ -4,7 +4,7 @@ namespace PyramidTraverseExercise.Elements.Provider
 {
     public class TwoDMatrixProvider : ITwoDMatrixProvider
     {
-        public int[][] Get2DMatrice()
+        public int[][] Get2DMatrix()
         {
             var matrice = new[]
             {

@@ -19,7 +19,7 @@ namespace PyramidTraverseExercise
             ITwoDMatrixProvider matrixProvider = new TwoDMatrixProvider();
             ITwoDMatrixPathfinderService matrixPathfinderService = new TwoDMatrixPathfinderService();
 
-            var matrice = matrixProvider.Get2DMatrice();
+            var matrice = matrixProvider.Get2DMatrix();
 
             var highestSum = matrixPathfinderService.GetHighestPossibleSum(matrice);
 
