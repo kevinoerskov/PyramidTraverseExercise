@@ -1,18 +1,18 @@
 ﻿namespace PyramidTraverseExercise.Elements.Service.TwoDMatrice.Entity
 {
-    public class MatrixPhantomChildElement
+    public class MatrixAccumulatedChildElement
     {
         public int OriginalValue { get; }
-        public int PhantomValue { get; }
+        public int AccumulatedValue { get; }
         public int RowIndex { get; }
         public int ColumnIndex { get; }
 
-        public MatrixPhantomChildElement(
+        public MatrixAccumulatedChildElement(
             MatrixChildElement childElement,
-            int phantomValue)
+            int accumulatedValue)
         {
             OriginalValue = childElement.Value;
-            PhantomValue = phantomValue;
+            AccumulatedValue = accumulatedValue;
             RowIndex = childElement.RowIndex;
             ColumnIndex = childElement.ColumnIndex;
         }

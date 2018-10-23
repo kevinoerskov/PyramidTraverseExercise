@@ -8,7 +8,7 @@ namespace PyramidTraverseExercise.Elements.Service.TwoDMatrice
     {
         public int GetHighestPossibleSum(int[][] matrix)
         {
-            var phantomMatrix = matrix.Copy();
+            var accumulatedScoreMatrix = matrix.Copy();
 
             for (var rowIndex = matrix.Length - 2; rowIndex >= 0; rowIndex--)
             {
@@ -18,45 +18,45 @@ namespace PyramidTraverseExercise.Elements.Service.TwoDMatrice
                 {
                     var currentValue = matrix[rowIndex][columnIndex];
 
-                    var phantomChildLeft = GetPhantomChildElement(
+                    var accumulatedChildLeft = GetAccumulatedChildElement(
                         ref matrix,
-                        ref phantomMatrix,
+                        ref accumulatedScoreMatrix,
                         rowIndex + 1,
                         columnIndex);
 
-                    var phantomChildRight = GetPhantomChildElement(
+                    var accumulatedChildRight = GetAccumulatedChildElement(
                         ref matrix,
-                        ref phantomMatrix,
+                        ref accumulatedScoreMatrix,
                         rowIndex + 1,
                         columnIndex + 1);
 
                     var childHasToBeEven = currentValue.IsEven() == false;
                     var highestValueChild = FindHighestValueChild(
-                        phantomChildLeft,
-                        phantomChildRight,
+                        accumulatedChildLeft,
+                        accumulatedChildRight,
                         childHasToBeEven);
 
-                    var currentPhantomValue = phantomMatrix[highestValueChild.RowIndex][highestValueChild.ColumnIndex];
-                    phantomMatrix[rowIndex][columnIndex] = currentValue + currentPhantomValue;
+                    var currentAccumulatedValue = accumulatedScoreMatrix[highestValueChild.RowIndex][highestValueChild.ColumnIndex];
+                    accumulatedScoreMatrix[rowIndex][columnIndex] = currentValue + currentAccumulatedValue;
                 }
             }
 
-            var highestSumPath = phantomMatrix[0][0];
+            var highestSumPath = accumulatedScoreMatrix[0][0];
 
             return highestSumPath;
         }
 
-        private static MatrixPhantomChildElement GetPhantomChildElement(
+        private static MatrixAccumulatedChildElement GetAccumulatedChildElement(
             ref int[][] matrix,
-            ref int[][] phantomMatrix,
+            ref int[][] accumulatedScoreMatrix,
             int rowIndex,
             int columnIndex)
         {
             var childElement = GetChildElement(ref matrix, rowIndex, columnIndex);
-            var phantomChildValue = phantomMatrix[childElement.RowIndex][childElement.ColumnIndex];
-            var phantomChildElement = new MatrixPhantomChildElement(childElement, phantomChildValue);
+            var accumulatedChildValue = accumulatedScoreMatrix[childElement.RowIndex][childElement.ColumnIndex];
+            var accumulatedChildElement = new MatrixAccumulatedChildElement(childElement, accumulatedChildValue);
 
-            return phantomChildElement;
+            return accumulatedChildElement;
         }
 
         private static MatrixChildElement GetChildElement(
@@ -70,8 +70,8 @@ namespace PyramidTraverseExercise.Elements.Service.TwoDMatrice
         }
 
         private static MatrixChildElement FindHighestValueChild(
-            MatrixPhantomChildElement childLeft,
-            MatrixPhantomChildElement childRight,
+            MatrixAccumulatedChildElement childLeft,
+            MatrixAccumulatedChildElement childRight,
             bool childHasToBeEven)
         {
             var finalChildLeft = GetChildElementOrDefault(childLeft, childHasToBeEven);
@@ -83,11 +83,11 @@ namespace PyramidTraverseExercise.Elements.Service.TwoDMatrice
         }
 
         private static MatrixChildElement GetChildElementOrDefault(
-            MatrixPhantomChildElement childElement,
+            MatrixAccumulatedChildElement childElement,
             bool childHasToBeEven)
         {
             var childElementValue = childElement.OriginalValue.IsEven() == childHasToBeEven
-                ? childElement.PhantomValue
+                ? childElement.AccumulatedValue
                 : 0;
 
             return new MatrixChildElement(

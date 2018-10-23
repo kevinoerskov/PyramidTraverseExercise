@@ -43,7 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\TwoDMatrixProvider.cs" />
     <Compile Include="Service\TwoDMatrice\Entity\MatrixChildElement.cs" />
-    <Compile Include="Service\TwoDMatrice\Entity\MatrixPhantomChildElement.cs" />
+    <Compile Include="Service\TwoDMatrice\Entity\MatrixAccumulatedChildElement.cs" />
     <Compile Include="Service\TwoDMatrice\TwoDMatrixPathfinderService.cs" />
   </ItemGroup>
   <ItemGroup>
